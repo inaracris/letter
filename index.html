@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter For You</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/1bb16f0e-63e7-4a5d-9b1c-1faae54a9c7c/favicon.ico?v=1750770511313">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #fdf2f2 0%, #f8e8e8 50%, #f5d8d8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        .code-entry-section {
+            text-align: center;
+        }
+
+        .heart-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .heart-emoji {
+            font-size: 7rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .heart-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+            z-index: 10;
+        }
+
+        .code-entry-section h1 {
+            color: #a65656;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+
+        .input-container {
+            margin-bottom: 2rem;
+        }
+
+        .code-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #f0c2c2;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #d69999;
+            box-shadow: 0 0 0 3px rgba(214, 153, 153, 0.2);
+        }
+
+        .code-input::placeholder {
+            color: #999;
+            font-weight: 300;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #d69999 0%, #c28888 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(214, 153, 153, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #c28888 0%, #b07777 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(214, 153, 153, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .letter-section {
+            display: none;
+            min-height: 100vh;
+            background-color: #fdf8f8;
+            background-image: 
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 38px,
+                    #e8c5c5 38px,
+                    #e8c5c5 40px
+                );
+            background-position: 0 80px;
+            padding: 60px 50px 40px 60px;
+            position: relative;
+            font-weight: bold;
+        }
+
+        .letter-section::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #c77777;
+        }
+
+        .letter-content {
+            background: transparent;
+            min-height: calc(100vh - 100px);
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 2.2;
+            color: #6b4545;
+        }
+
+        .letter-text {
+            outline: none;
+            border: none;
+            background: transparent;
+            width: 100%;
+            min-height: 400px;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: 2.2;
+            color: inherit;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(166, 86, 86, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(166, 86, 86, 0.3);
+        }
+
+        .back-btn:hover {
+            background: rgba(166, 86, 86, 1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(166, 86, 86, 0.4);
+        }
+
+        .error-message {
+            color: #b07777;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .code-entry-section h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .letter-section {
+                padding: 50px 30px 30px 40px;
+            }
+            
+            .editable-content {
+                font-size: 14px;
+                line-height: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Code Entry Section -->
+        <div class="code-entry-section" id="codeEntry">
+            <div class="heart-container">
+                <div class="heart-emoji">❤️
+                    <div class="heart-text">I+C</div>
+                </div>
+            </div>
+            <h1>Enter Code</h1>
+            <div class="input-container">
+                <input type="text" class="code-input" id="codeInput" placeholder="Enter your code">
+                <div class="error-message" id="errorMessage">Incorrect code. Please try again.</div>
+            </div>
+            <button class="submit-btn" id="submitBtn">Submit</button>
+        </div>
+
+        <!-- Letter Section -->
+        <div class="letter-section" id="letterSection">
+            <button class="back-btn" id="backBtn">←</button>
+            <div class="letter-content">
+                <div class="letter-text" id="letterText"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Your letter content - Edit this text to customize what appears in the letter
+        const LETTER_CONTENT = `Today marks TWO months of us being officially together. Happy two months my love. I've really been so happy with you, more than I've ever been before. You're truly the best thing that has ever happened to me and you can't imagine how much I value and appreciate you. I feel calm and comfortable with you. You make me feel understood in ways I didn't think were possible. You make me feel seen. You're really so patient and understanding with me, I don't know how you deal with my stuff. Thank you for that, thank you for how you are with me, thank you for how you treat me. You really make me feel like nobody else has. You've made my life so much better and I hope I have for you aswell. I really will always want the best for you. I'll always try my best to show you how much I deeply love you, and I'm sorry if I don't always know how to show it. I think I'm just a bit awkward and I'm sorry for that. But you always must know that I love you sooooo so much. So please please please always tell me if something's wrong, anything, no matter how bad it is, no matter how it'll make me feel. Tell me everything, I want you to have that trust with me to communicate anything with me. All I want is the best for you, I want to try to be the best for you. You deserve everything. You're so brilliant, funny, passionate, charming, sweet, expressive, so confident, enchanting, and an infinity of many other things I love about you so much. You're all this in ways that go deeper than just appearances. Oh but your appearances are absolutely beautiful. Your face, it's so gorgeous, it's perfect. You're perfect, you really are. Everything you are is exactly what makes you so lovable. You don't need to ever hide or change a single thing. And I'm so proud of you, you're so young and yet you're so absolutely amazing and have achieved so so much. You inspire me. You're really the most amazing person I'll ever meet. I know I've said it but I'll keep saying it, I am the luckiest man alive for being able to be yours, I truly mean it. I am so grateful for you I really am. I always want to be there for you. I want to forever be a part of your life. I want to be there for your ups and lows. I want everything with you. I'm not really joking when I say I'm inarasexual, I only want to be yours and I'll always only want to be yours. Thank you for being you, really thank you for everything. Thank you for letting me be yours, you are all I want and will ever want. I love you more than words know how to say. Always.`;
+        // Set your secret code here
+        const SECRET_CODE = "HTNOM2"; // Change this to your desired code
+        
+        const codeEntry = document.getElementById('codeEntry');
+        const letterSection = document.getElementById('letterSection');
+        const codeInput = document.getElementById('codeInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const backBtn = document.getElementById('backBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const letterText = document.getElementById('letterText');
+
+        // Display the letter content
+        letterText.textContent = LETTER_CONTENT;
+
+        // Handle code submission
+        function checkCode() {
+            const enteredCode = codeInput.value.trim();
+            
+            if (enteredCode === SECRET_CODE) {
+                // Correct code - show letter section
+                codeEntry.style.display = 'none';
+                letterSection.style.display = 'block';
+                document.body.style.background = 'none';
+                errorMessage.style.display = 'none';
+            } else {
+                // Incorrect code - show error
+                errorMessage.style.display = 'block';
+                codeInput.value = '';
+                codeInput.focus();
+                
+                // Shake animation
+                codeInput.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    codeInput.style.animation = '';
+                }, 500);
+            }
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', checkCode);
+        
+        codeInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkCode();
+            }
+        });
+
+        backBtn.addEventListener('click', function() {
+            letterSection.style.display = 'none';
+            codeEntry.style.display = 'block';
+            document.body.style.background = 'linear-gradient(135deg, #fdf2f2 0%, #f8e8e8 50%, #f5d8d8 100%)';
+            codeInput.value = '';
+            errorMessage.style.display = 'none';
+        });
+
+        // Auto-resize textarea - removed since we're not using textarea anymore
+        // letterText.addEventListener('input', function() {
+        //     this.style.height = 'auto';
+        //     this.style.height = this.scrollHeight + 'px';
+        // });
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Focus on code input when page loads
+        window.addEventListener('load', () => {
+            codeInput.focus();
+        });
+    </script>
+</body>
+</html>
