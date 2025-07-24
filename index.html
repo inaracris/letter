@@ -11,37 +11,37 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+    
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #fdf2f2 0%, #f8e8e8 50%, #f5d8d8 100%);
+            background: linear-gradient(135deg, #f5f3ff 0%, #eadeff 50%, #e1d1ff 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
+    
         .container {
             width: 100%;
             max-width: 400px;
             padding: 20px;
         }
-
+    
         .code-entry-section {
             text-align: center;
         }
-
+    
         .heart-container {
             margin-bottom: 2rem;
             position: relative;
         }
-
+    
         .heart-emoji {
             font-size: 7rem;
             position: relative;
             display: inline-block;
         }
-
+    
         .heart-text {
             position: absolute;
             top: 50%;
@@ -53,23 +53,23 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.7);
             z-index: 10;
         }
-
+    
         .code-entry-section h1 {
-            color: #a65656;
+            color: #7e57c2;
             font-size: 2.5rem;
             font-weight: 300;
             margin-bottom: 3rem;
             letter-spacing: 1px;
         }
-
+    
         .input-container {
             margin-bottom: 2rem;
         }
-
+    
         .code-input {
             width: 100%;
             padding: 1rem 1.5rem;
-            border: 2px solid #f0c2c2;
+            border: 2px solid #d6b3ff;
             border-radius: 12px;
             font-size: 1.1rem;
             background: rgba(255, 255, 255, 0.9);
@@ -77,22 +77,22 @@
             text-align: center;
             transition: all 0.3s ease;
         }
-
+    
         .code-input:focus {
             outline: none;
-            border-color: #d69999;
-            box-shadow: 0 0 0 3px rgba(214, 153, 153, 0.2);
+            border-color: #b487f2;
+            box-shadow: 0 0 0 3px rgba(180, 135, 242, 0.2);
         }
-
+    
         .code-input::placeholder {
             color: #999;
             font-weight: 300;
         }
-
+    
         .submit-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #d69999 0%, #c28888 100%);
+            background: linear-gradient(135deg, #b487f2 0%, #a26be2 100%);
             color: white;
             border: none;
             border-radius: 12px;
@@ -100,36 +100,36 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(214, 153, 153, 0.3);
+            box-shadow: 0 4px 15px rgba(180, 135, 242, 0.3);
         }
-
+    
         .submit-btn:hover {
-            background: linear-gradient(135deg, #c28888 0%, #b07777 100%);
+            background: linear-gradient(135deg, #a26be2 0%, #935ed2 100%);
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(214, 153, 153, 0.4);
+            box-shadow: 0 6px 20px rgba(180, 135, 242, 0.4);
         }
-
+    
         .submit-btn:active {
             transform: translateY(0);
         }
-
+    
         .letter-section {
             display: none;
             min-height: 100vh;
-            background-color: #fdf8f8;
+            background-color: #faf5ff;
             background-image: 
                 repeating-linear-gradient(
                     transparent,
                     transparent 38px,
-                    #e8c5c5 38px,
-                    #e8c5c5 40px
+                    #e0cffe 38px,
+                    #e0cffe 40px
                 );
             background-position: 0 80px;
             padding: 60px 50px 40px 60px;
             position: relative;
             font-weight: bold;
         }
-
+    
         .letter-section::before {
             content: '';
             position: absolute;
@@ -137,18 +137,18 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background-color: #c77777;
+            background-color: #a26be2;
         }
-
+    
         .letter-content {
             background: transparent;
             min-height: calc(100vh - 100px);
             font-family: 'Courier New', monospace;
             font-size: 16px;
             line-height: 2.2;
-            color: #6b4545;
+            color: #5d3a8c;
         }
-
+    
         .letter-text {
             outline: none;
             border: none;
@@ -164,12 +164,12 @@
             overflow-wrap: break-word;
             hyphens: auto;
         }
-
+    
         .back-btn {
             position: fixed;
             top: 20px;
             left: 20px;
-            background: rgba(166, 86, 86, 0.9);
+            background: rgba(126, 87, 194, 0.9);
             color: white;
             border: none;
             border-radius: 50%;
@@ -179,22 +179,22 @@
             font-size: 18px;
             transition: all 0.3s ease;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(166, 86, 86, 0.3);
+            box-shadow: 0 4px 15px rgba(126, 87, 194, 0.3);
         }
-
+    
         .back-btn:hover {
-            background: rgba(166, 86, 86, 1);
+            background: rgba(126, 87, 194, 1);
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(166, 86, 86, 0.4);
+            box-shadow: 0 6px 20px rgba(126, 87, 194, 0.4);
         }
-
+    
         .error-message {
-            color: #b07777;
+            color: #935ed2;
             font-size: 0.9rem;
             margin-top: 10px;
             display: none;
         }
-
+    
         @media (max-width: 480px) {
             .container {
                 padding: 15px;
@@ -215,13 +215,14 @@
             }
         }
     </style>
+
 </head>
 <body>
     <div class="container">
         <!-- Code Entry Section -->
         <div class="code-entry-section" id="codeEntry">
             <div class="heart-container">
-                <div class="heart-emoji">❤️
+                <div class="heart-emoji">💜
                     <div class="heart-text">I+C</div>
                 </div>
             </div>
